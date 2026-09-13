@@ -19,6 +19,10 @@ export default tseslint.config(
     },
   },
   {
+    files: ['**/*.astro'],
+    extends: [tseslint.configs.disableTypeChecked],
+  },
+  {
     files: ['**/*.mjs', '**/*.js', '**/*.cjs'],
     extends: [tseslint.configs.disableTypeChecked],
     languageOptions: { globals: { ...globals.node, ...globals.browser } },

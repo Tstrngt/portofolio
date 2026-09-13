@@ -18,13 +18,16 @@
 
 :root {
   color-scheme: light;
+  --rail-width: 3rem;
   --paper: #e9e5db;
   --ink: #171c24;
   --survey: #0b4f9e;
   --werk: #f2b705;
   --rust: #a93e1f;
   --graphite: #6b6f76;
-  --grid-line: color-mix(in srgb, var(--graphite) 19%, transparent);
+  --secondary-ink: color-mix(in srgb, var(--graphite) 55%, var(--ink));
+  --grid-line: color-mix(in srgb, var(--graphite) 16%, transparent);
+  --grid-major: color-mix(in srgb, var(--graphite) 30%, transparent);
   --focus-ring: var(--survey);
 }
 
@@ -36,6 +39,8 @@
   --werk: #f2b705;
   --rust: #e47455;
   --graphite: #a8abb1;
-  --grid-line: color-mix(in srgb, var(--graphite) 15%, transparent);
+  --secondary-ink: var(--graphite);
+  --grid-line: color-mix(in srgb, var(--graphite) 12%, transparent);
+  --grid-major: color-mix(in srgb, var(--graphite) 25%, transparent);
   --focus-ring: var(--werk);
 }

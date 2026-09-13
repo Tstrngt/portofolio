@@ -11,6 +11,7 @@ for (const theme of ['light', 'night'] as const) {
     test(`${viewport.name} ${theme} screenshot`, async ({ page }, testInfo) => {
       await page.setViewportSize(viewport);
       await page.addInitScript((selectedTheme) => {
+        localStorage.setItem('theme', selectedTheme);
         document.documentElement.dataset.theme = selectedTheme;
       }, theme);
       await page.goto('/');

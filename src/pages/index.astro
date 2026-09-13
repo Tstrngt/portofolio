@@ -1,23 +1,76 @@
 ---
-import '../styles/global.css';
+import SectionRail from '../components/chrome/SectionRail.astro';
+import SheetTitleBlock from '../components/chrome/SheetTitleBlock.astro';
+import ThemeToggle from '../components/chrome/ThemeToggle.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const sections = [
+  { id: 'nu', number: '01', title: 'Nu', note: 'Huidige rol en werkgebied' },
+  { id: 'traject', number: '02', title: 'Traject', note: 'Route door werk en opleiding' },
+  {
+    id: 'capaciteit',
+    number: '03',
+    title: 'Capaciteit',
+    note: 'Vier disciplines, gelijkwaardig getekend',
+  },
+  { id: 'projecten', number: '04', title: 'Projecten', note: 'Probleem, aanpak en resultaat' },
+  { id: 'buiten-werk', number: '05', title: 'Buiten werk', note: 'Ruimte buiten de lijnen' },
+  {
+    id: 'contact',
+    number: '06',
+    title: 'Contact',
+    note: 'Directe lijn en technische verantwoording',
+  },
+] as const;
 ---
 
-<!doctype html>
-<html lang="nl">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="description" content="Portfolio van Tim van Gorkom." />
-    <title>Tim van Gorkom</title>
-  </head>
-  <body>
-    <main>
-      <section class="scaffold" aria-labelledby="scaffold-title">
-        <h1 id="scaffold-title">Fundering gereed.</h1>
-        <p>
-          De technische basis staat. De inhoud en tekeningshell volgen in afzonderlijke stappen.
-        </p>
+<BaseLayout title="Tim van Gorkom" description="Portfolio van Tim van Gorkom.">
+  <SectionRail />
+  <ThemeToggle />
+  <main id="main-content" class="drawing-sheet">
+    <section
+      id="hero"
+      class="sheet-section hero-shell"
+      data-sheet="Profiel"
+      aria-labelledby="hero-title"
+    >
+      <div class="hero-shell__reference" aria-hidden="true">
+        <span>Dwarsprofiel</span>
+        <span>Schaal 1:1</span>
+      </div>
+      <div class="hero-shell__title">
+        <p class="coordinate">Nulpunt / blad 00</p>
+        <h1 id="hero-title">Tim van Gorkom</h1>
+        <p>Fysieke en digitale infrastructuur, op één tekenblad.</p>
+      </div>
+      <div class="datum-line" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </section>
+    {sections.map(({ id, number, title, note }) => (
+      <section
+        id={id}
+        class="sheet-section section-stub"
+        data-sheet={title}
+        aria-labelledby={`${id}-title`}
+      >
+        <span class="section-stub__number" aria-hidden="true">
+          {number}
+        </span>
+        <div>
+          <h2 id={`${id}-title`}>{title}</h2>
+          <p>{note}</p>
+        </div>
+        <span class="section-stub__status">In uitwerking</span>
       </section>
-    </main>
-  </body>
-</html>
+    ))}
+  </main>
+  <SheetTitleBlock />
+  <script>
+    import '../scripts/shell';
+  </script>
+</BaseLayout>

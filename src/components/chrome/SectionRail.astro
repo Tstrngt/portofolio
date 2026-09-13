@@ -1,0 +1,31 @@
+---
+const sections = [
+  { id: 'hero', label: 'Profiel', mark: '0,0' },
+  { id: 'nu', label: 'Nu', mark: '0,2' },
+  { id: 'traject', label: 'Traject', mark: '0,4' },
+  { id: 'capaciteit', label: 'Capaciteit', mark: '0,6' },
+  { id: 'projecten', label: 'Projecten', mark: '0,8' },
+  { id: 'buiten-werk', label: 'Buiten werk', mark: '1,0' },
+  { id: 'contact', label: 'Contact', mark: '1,2' },
+] as const;
+---
+
+<aside class="section-rail" aria-label="Paginanavigatie">
+  <a class="skip-link" href="#main-content">
+    Direct naar inhoud
+  </a>
+  <nav aria-label="Secties">
+    <ol>
+      {sections.map(({ id, label, mark }, index) => (
+        <li>
+          <a href={`#${id}`} aria-current={index === 0 ? 'location' : undefined}>
+            <span class="rail-mark" aria-hidden="true">
+              {mark}
+            </span>
+            <span class="rail-label">{label}</span>
+          </a>
+        </li>
+      ))}
+    </ol>
+  </nav>
+</aside>

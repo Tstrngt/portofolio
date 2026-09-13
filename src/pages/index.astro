@@ -1,4 +1,5 @@
 ---
+import DualInfrastructureHero from '../components/hero/DualInfrastructureHero.astro';
 import SectionRail from '../components/chrome/SectionRail.astro';
 import SheetTitleBlock from '../components/chrome/SheetTitleBlock.astro';
 import ThemeToggle from '../components/chrome/ThemeToggle.astro';
@@ -28,29 +29,7 @@ const sections = [
   <SectionRail />
   <ThemeToggle />
   <main id="main-content" class="drawing-sheet">
-    <section
-      id="hero"
-      class="sheet-section hero-shell"
-      data-sheet="Profiel"
-      aria-labelledby="hero-title"
-    >
-      <div class="hero-shell__reference" aria-hidden="true">
-        <span>Dwarsprofiel</span>
-        <span>Schaal 1:1</span>
-      </div>
-      <div class="hero-shell__title">
-        <p class="coordinate">Nulpunt / blad 00</p>
-        <h1 id="hero-title">Tim van Gorkom</h1>
-        <p>Fysieke en digitale infrastructuur, op één tekenblad.</p>
-      </div>
-      <div class="datum-line" aria-hidden="true">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-    </section>
+    <DualInfrastructureHero />
     {sections.map(({ id, number, title, note }) => (
       <section
         id={id}
@@ -70,7 +49,4 @@ const sections = [
     ))}
   </main>
   <SheetTitleBlock />
-  <script>
-    import '../scripts/shell';
-  </script>
 </BaseLayout>

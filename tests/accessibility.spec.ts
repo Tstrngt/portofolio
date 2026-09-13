@@ -4,6 +4,7 @@ import { expect, test } from '@playwright/test';
 for (const theme of ['light', 'night'] as const) {
   test(`has no accessibility violations in ${theme} theme`, async ({ page }) => {
     await page.addInitScript((selectedTheme) => {
+      localStorage.setItem('theme', selectedTheme);
       document.documentElement.dataset.theme = selectedTheme;
     }, theme);
     await page.goto('/');

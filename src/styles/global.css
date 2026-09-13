@@ -1,0 +1,78 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/overpass/wght.css';
+@import '@fontsource/ibm-plex-mono/400.css';
+@import './tokens.css';
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Overpass Variable', sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 2rem 2rem;
+  font-size: var(--text-step-0);
+  line-height: 1.6;
+}
+
+button,
+a,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+:focus-visible {
+  outline: 0.2rem solid var(--focus-ring);
+  outline-offset: 0.2rem;
+}
+
+::selection {
+  background: var(--werk);
+  color: #171c24;
+}
+
+main {
+  display: grid;
+  min-height: 100vh;
+  place-items: center;
+  padding: 2rem;
+}
+
+.scaffold {
+  width: min(100%, 60rem);
+  border-block: 1px solid var(--graphite);
+  padding-block: clamp(2rem, 8vw, 6rem);
+}
+
+.scaffold p {
+  max-width: 60ch;
+  margin: 0;
+}
+
+.scaffold h1 {
+  margin: 0;
+  color: var(--survey);
+  font-size: var(--text-step-3);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.05;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}

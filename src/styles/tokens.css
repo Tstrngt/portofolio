@@ -1,0 +1,41 @@
+@theme {
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+  --color-survey: var(--survey);
+  --color-werk: var(--werk);
+  --color-rust: var(--rust);
+  --color-graphite: var(--graphite);
+  --font-sans: 'Overpass Variable', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+  --text-step--1: clamp(0.8rem, 0.77rem + 0.13vw, 0.88rem);
+  --text-step-0: clamp(1rem, 0.95rem + 0.22vw, 1.13rem);
+  --text-step-1: clamp(1.25rem, 1.17rem + 0.36vw, 1.46rem);
+  --text-step-2: clamp(1.56rem, 1.43rem + 0.57vw, 1.89rem);
+  --text-step-3: clamp(1.95rem, 1.76rem + 0.86vw, 2.46rem);
+  --text-step-4: clamp(2.44rem, 2.16rem + 1.29vw, 3.2rem);
+  --text-step-5: clamp(3.05rem, 2.64rem + 1.91vw, 4.16rem);
+}
+
+:root {
+  color-scheme: light;
+  --paper: #e9e5db;
+  --ink: #171c24;
+  --survey: #0b4f9e;
+  --werk: #f2b705;
+  --rust: #a93e1f;
+  --graphite: #6b6f76;
+  --grid-line: color-mix(in srgb, var(--graphite) 19%, transparent);
+  --focus-ring: var(--survey);
+}
+
+:root[data-theme='night'] {
+  color-scheme: dark;
+  --paper: #12161c;
+  --ink: #e9e5db;
+  --survey: #75abe8;
+  --werk: #f2b705;
+  --rust: #e47455;
+  --graphite: #a8abb1;
+  --grid-line: color-mix(in srgb, var(--graphite) 15%, transparent);
+  --focus-ring: var(--werk);
+}

@@ -1,13 +1,15 @@
 import { readdir, readFile } from 'node:fs/promises';
 import { extname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 const contentDirectory = new URL('../src/content/', import.meta.url);
 
 async function files(directory) {
-  const entries = await readdir(directory, { withFileTypes: true });
+  const directoryPath = fileURLToPath(directory);
+  const entries = await readdir(directoryPath, { withFileTypes: true });
   const nested = await Promise.all(
     entries.map((entry) =>
-      entry.isDirectory() ? files(join(directory, entry.name)) : [join(directory, entry.name)],
+      entry.isDirectory() ? files(new URL(`${entry.name}/`, directory)) : [join(directoryPath, entry.name)],
     ),
   );
   return nested.flat();

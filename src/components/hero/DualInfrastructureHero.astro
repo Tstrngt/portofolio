@@ -1,0 +1,199 @@
+---
+import profiel from '../../content/profiel.json';
+
+const layers = [
+  { road: 'Kabelgoot', network: 'Firewall zone' },
+  { road: 'Berm', network: 'Reverse proxy' },
+  { road: 'Belijning', network: 'Application' },
+  { road: 'Deklaag', network: 'Container runtime' },
+  { road: 'Steenslagasfaltbeton', network: 'Hypervisor' },
+  { road: 'Fundering', network: 'Bare metal' },
+] as const;
+---
+
+<section
+  id="hero"
+  class="sheet-section hero-shell"
+  data-sheet="Profiel"
+  aria-labelledby="hero-title"
+>
+  <div class="hero-shell__reference" aria-hidden="true">
+    <span>Dwarsprofiel / netwerkstack</span>
+    <span>Schaal 1:1</span>
+  </div>
+  <div class="hero-shell__title">
+    <p class="coordinate">Nulpunt / blad 00</p>
+    <h1 id="hero-title">{profiel.name}</h1>
+    <p class="hero-headline">{profiel.heroHeadline}</p>
+    <p class="hero-introduction">{profiel.oneLiner}</p>
+  </div>
+
+  <figure class="hero-figure" aria-labelledby="hero-caption">
+    <svg
+      class="hero-diagram"
+      viewBox="0 0 760 360"
+      role="img"
+      aria-label="Gelaagde tekening die zowel als wegdoorsnede als als netwerkstack gelezen kan worden"
+    >
+      <defs>
+        <pattern
+          id="road-hatch"
+          patternUnits="userSpaceOnUse"
+          width="8"
+          height="8"
+          patternTransform="rotate(45)"
+        >
+          <path
+            d="M0 0v8"
+            stroke="var(--ink)"
+            stroke-width="0.75"
+            stroke-opacity="0.16"
+            fill="none"
+          />
+        </pattern>
+        <pattern id="network-hatch" patternUnits="userSpaceOnUse" width="12" height="12">
+          <circle cx="1.5" cy="1.5" r="0.9" fill="var(--survey)" fill-opacity="0.25" />
+          <circle cx="7.5" cy="7.5" r="0.9" fill="var(--survey)" fill-opacity="0.25" />
+        </pattern>
+      </defs>
+
+      <g class="hero-diagram__base">
+        <line x1="80" y1="120" x2="680" y2="120" stroke="var(--ink)" stroke-width="2" />
+        {layers.map((_, index) => {
+          const y = 132 + index * 36;
+          return (
+            <rect
+              x="120"
+              y={y}
+              width="520"
+              height="30"
+              fill="none"
+              stroke="var(--ink)"
+              stroke-width="1"
+            />
+          );
+        })}
+      </g>
+
+      <g class="hero-diagram__road" data-layer="road">
+        {layers.map(({ road }, index) => {
+          const y = 132 + index * 36;
+          return (
+            <>
+              <rect
+                x="120"
+                y={y}
+                width="520"
+                height="30"
+                fill="url(#road-hatch)"
+                stroke="var(--ink)"
+                stroke-width="1.2"
+              />
+              <line x1="75" y1={y + 15} x2="120" y2={y + 15} stroke="var(--ink)" stroke-width="1" />
+              <circle cx="75" cy={y + 15} r="2" fill="var(--werk)" />
+              <text x="65" y={y + 19} text-anchor="end" class="hero-label hero-label--road">
+                {road}
+              </text>
+            </>
+          );
+        })}
+      </g>
+
+      <g class="hero-diagram__network" data-layer="network">
+        {layers.map(({ network }, index) => {
+          const y = 132 + index * 36;
+          return (
+            <>
+              <rect
+                x="120"
+                y={y}
+                width="520"
+                height="30"
+                fill="url(#network-hatch)"
+                stroke="var(--survey)"
+                stroke-width="1.6"
+              />
+              <line
+                x1="640"
+                y1={y + 15}
+                x2="685"
+                y2={y + 15}
+                stroke="var(--survey)"
+                stroke-width="1"
+              />
+              <circle cx="685" cy={y + 15} r="2" fill="var(--werk)" />
+              <text x="695" y={y + 19} class="hero-label hero-label--network">
+                {network}
+              </text>
+            </>
+          );
+        })}
+      </g>
+    </svg>
+
+    <figcaption class="hero-caption" aria-hidden="true">
+      <span id="hero-caption">Eén doorsnede, twee leeswijzen.</span>
+    </figcaption>
+
+    <div class="hero-control" data-hero-control>
+      <label for="hero-mode" class="hero-control__label">
+        Leeswijze
+      </label>
+      <div class="hero-control__track">
+        <span class="hero-control__end" aria-hidden="true">
+          Weg
+        </span>
+        <input
+          id="hero-mode"
+          class="hero-control__input"
+          type="range"
+          min="0"
+          max="1"
+          step="0.01"
+          value="0"
+          aria-label="Schakel tussen weg en netwerk"
+          aria-describedby="hero-mode-hint"
+        />
+        <span class="hero-control__end" aria-hidden="true">
+          Netwerk
+        </span>
+      </div>
+      <p id="hero-mode-hint" class="hero-control__hint">
+        Sleep of gebruik pijltjestoetsen om de benamingen te wisselen.
+      </p>
+    </div>
+
+    <div class="hero-control hero-control--static" data-hero-static hidden>
+      <p>De weg en het netwerk zijn twee namen voor hetzelfde ontwerp.</p>
+    </div>
+  </figure>
+
+  <div class="hero-aside" data-hero-aside hidden>
+    <dl>
+      {layers.map(({ road, network }) => (
+        <div>
+          <dt>{road}</dt>
+          <dd>{network}</dd>
+        </div>
+      ))}
+    </dl>
+  </div>
+
+  <noscript>
+    <style>
+      [data-hero-control] {
+        display: none !important;
+      }
+      [data-hero-static] {
+        display: block !important;
+      }
+      [data-hero-aside] {
+        display: block !important;
+      }
+    </style>
+  </noscript>
+</section>
+
+<script>
+  import '../../scripts/hero';
+</script>

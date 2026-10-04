@@ -1,6 +1,18 @@
 # Portfolio
 
-A static, one-page portfolio about physical and digital infrastructure. The site is built with Astro 5, strict TypeScript, Tailwind CSS v4, and progressively enhanced interactions.
+Een persoonlijk portfolio voor Tim van Gorkom met een scrollovergang van digitale netwerken naar wegen, blijvend zichtbare glazen navigatie en afzonderlijke projectgroepen voor IT en civiele techniek. Gebouwd op de bestaande Astro-website, met lokale fonts en normale paginascroll.
+
+## Online
+
+GitHub Pages publiceert via `.github/workflows/pages.yml` bij een push naar `main`.
+Zet in **Settings → Pages → Build and deployment → Source** de bron op **GitHub Actions**.
+De project-URL is `https://tstrngt.github.io/portofolio/`.
+
+## Je portret toevoegen
+
+Plaats je foto als `public/images/tim-van-gorkom.webp` en commit het bestand. Het portret verschijnt automatisch na de volgende publicatie. Zonder foto toont de site je monogram.
+
+Met `?preview=1` achter de website-URL kun je een foto lokaal uitproberen bij **Over Tim → Foto toevoegen**. Die selectie wordt niet geüpload of blijvend opgeslagen. Gebruik het bestand in de bovenstaande map voor de gepubliceerde foto.
 
 ## Requirements
 
@@ -43,4 +55,4 @@ The built page makes no third-party requests. Fonts are packaged into the build,
 
 ## Content
 
-Structured portfolio content will be added in a later milestone. Once `src/content/` exists, CI rejects any unresolved string beginning with `TODO:`.
+De homepage staat in `src/pages/index.astro`, de vormgeving in `src/styles/portfolio.css` en de scrollanimatie in `src/scripts/portfolio.js`. De eerdere componenten blijven in de repository beschikbaar. CI rejects any unresolved string beginning with `TODO:` in `src/content/`.

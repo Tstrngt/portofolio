@@ -2,7 +2,7 @@
 import { existsSync } from 'node:fs';
 import ThemeToggle from '../components/chrome/ThemeToggle.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
-const base = import.meta.env.BASE_URL;
+const base = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/`;
 const portraitExists = existsSync(
   new URL('../../public/images/tim-van-gorkom.webp', import.meta.url),
 );

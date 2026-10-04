@@ -3,6 +3,7 @@ import { dirname, join, normalize } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const dist = fileURLToPath(new URL('../dist/', import.meta.url));
+const base = process.env.GITHUB_PAGES === 'true' ? '/portofolio/' : '/';
 const entries = await readdir(dist, { recursive: true });
 const htmlFiles = entries.filter((file) => file.endsWith('.html'));
 const missing = [];
@@ -12,7 +13,11 @@ for (const htmlFile of htmlFiles) {
   for (const match of html.matchAll(/(?:href|src)=["']([^"'#?]+)["']/g)) {
     const link = match[1];
     if (!link || /^(?:https?:|mailto:|tel:|data:)/.test(link)) continue;
-    const relative = link.startsWith('/') ? link.slice(1) : join(dirname(htmlFile), link);
+    const relative = link.startsWith(base)
+      ? link.slice(base.length)
+      : link.startsWith('/')
+        ? link.slice(1)
+        : join(dirname(htmlFile), link);
     const path = normalize(join(dist, relative));
     try {
       await access(path);

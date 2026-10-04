@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url';
 import { gzipSync } from 'node:zlib';
 
 const dist = fileURLToPath(new URL('../dist/', import.meta.url));
+const base = process.env.GITHUB_PAGES === 'true' ? '/portofolio/' : '/';
 const entries = await readdir(dist, { recursive: true });
 const htmlFiles = entries.filter((file) => file.endsWith('.html'));
 const scripts = new Set();
@@ -12,7 +13,7 @@ for (const htmlFile of htmlFiles) {
   const html = await readFile(join(dist, htmlFile), 'utf8');
   for (const match of html.matchAll(/<script[^>]+src=["']([^"']+)["']/g)) {
     const source = match[1];
-    if (source?.startsWith('/')) scripts.add(source.slice(1));
+    if (source?.startsWith(base)) scripts.add(source.slice(base.length));
   }
 }
 

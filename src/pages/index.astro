@@ -1,52 +1,291 @@
 ---
-import DualInfrastructureHero from '../components/hero/DualInfrastructureHero.astro';
-import SectionRail from '../components/chrome/SectionRail.astro';
-import SheetTitleBlock from '../components/chrome/SheetTitleBlock.astro';
+import { existsSync } from 'node:fs';
 import ThemeToggle from '../components/chrome/ThemeToggle.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
-
-const sections = [
-  { id: 'nu', number: '01', title: 'Nu', note: 'Huidige rol en werkgebied' },
-  { id: 'traject', number: '02', title: 'Traject', note: 'Route door werk en opleiding' },
-  {
-    id: 'capaciteit',
-    number: '03',
-    title: 'Capaciteit',
-    note: 'Vier disciplines, gelijkwaardig getekend',
-  },
-  { id: 'projecten', number: '04', title: 'Projecten', note: 'Probleem, aanpak en resultaat' },
-  { id: 'buiten-werk', number: '05', title: 'Buiten werk', note: 'Ruimte buiten de lijnen' },
-  {
-    id: 'contact',
-    number: '06',
-    title: 'Contact',
-    note: 'Directe lijn en technische verantwoording',
-  },
-] as const;
+const base = import.meta.env.BASE_URL;
+const portraitExists = existsSync(
+  new URL('../../public/images/tim-van-gorkom.webp', import.meta.url),
+);
 ---
 
-<BaseLayout title="Tim van Gorkom" description="Portfolio van Tim van Gorkom.">
-  <SectionRail />
-  <ThemeToggle />
-  <main id="main-content" class="drawing-sheet">
-    <DualInfrastructureHero />
-    {sections.map(({ id, number, title, note }) => (
+<BaseLayout
+  title="Tim van Gorkom | Civiele techniek, websites & hosting"
+  description="Projectbegeleider bij KWS Infra en technisch ondernemer. Ontdek mijn werk in civiele techniek, webontwikkeling en hosting met GalaxyHost en Servura."
+>
+  <a class="skip-link" href="#main-content">
+    Ga naar de inhoud
+  </a>
+  <div id="tim-motion" aria-label="Scrollconcept voor het portfolio van Tim van Gorkom">
+    <header class="tm-nav">
+      <div class="tm-identity">
+        <a class="tm-brand" data-jump="digital" href="#tm-start">
+          Tim van Gorkom<small>INFRA & IT</small>
+        </a>
+        <ThemeToggle />
+      </div>
+      <nav aria-label="Hoofdnavigatie">
+        <a class="tm-glass cursor-interaction" data-jump="digital" href="#tm-digital-projects">
+          Digitaal
+        </a>
+        <a class="tm-glass cursor-interaction" data-jump="infra" href="#tm-civil-projects">
+          Civiel
+        </a>
+        <a class="tm-glass cursor-interaction" data-jump="work" href="#projecten">
+          Mijn werk
+        </a>
+        <a class="tm-glass tm-contact cursor-interaction" data-jump="bio" href="#tm-about">
+          Over Tim ↘
+        </a>
+      </nav>
+    </header>
+    <main id="main-content" class="tm-scroll">
       <section
-        id={id}
-        class="sheet-section section-stub"
-        data-sheet={title}
-        aria-labelledby={`${id}-title`}
+        class="tm-journey"
+        id="tm-start"
+        aria-label="Van digitale infrastructuur naar civiele techniek"
       >
-        <span class="section-stub__number" aria-hidden="true">
-          {number}
-        </span>
-        <div>
-          <h2 id={`${id}-title`}>{title}</h2>
-          <p>{note}</p>
+        <div class="tm-stage">
+          <canvas class="tm-canvas" aria-hidden="true"></canvas>
+          <div class="tm-story" data-story="digital">
+            <p class="tm-kicker">01 / Digitale infrastructuur</p>
+            <h1>
+              Ik bouw aan
+              <br />
+              infrastructuur.
+              <br />
+              Buiten én online.
+            </h1>
+            <p class="tm-description">
+              Ik ben Tim. Sinds 2020 bouw ik aan hosting en websites. Van gamehosting met GalaxyHost
+              tot digitale oplossingen voor ondernemers met Servura.
+            </p>
+            <a
+              class="tm-glass tm-contact"
+              href="https://servura.nl"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Bekijk Servura ↗
+            </a>
+          </div>
+          <div class="tm-story" data-story="bridge" hidden>
+            <p class="tm-kicker">Twee werkgebieden / één technische blik</p>
+            <h2>
+              Van verbindingen
+              <br />
+              naar wegen.
+            </h2>
+            <p class="tm-description">
+              Mijn interesse in techniek loopt door beide werelden heen: van de systemen achter een
+              website tot de voorbereiding van werkzaamheden buiten.
+            </p>
+          </div>
+          <div class="tm-story infra" data-story="infra" hidden>
+            <p class="tm-kicker">02 / Civiele techniek</p>
+            <h2>
+              De voorbereiding
+              <br />
+              achter de
+              <br />
+              uitvoering.
+            </h2>
+            <p class="tm-description">
+              Als projectbegeleider / werkvoorbereider bij KWS Infra Amsterdam-Utrecht werk ik aan
+              het ROK-contract voor asfaltonderhoud in Haarlemmermeer.
+            </p>
+            <button class="tm-glass cursor-interaction" type="button" data-jump="work">
+              Ontdek mijn werk ↓
+            </button>
+          </div>
+          <div class="tm-stage-label">
+            <span data-scene-label>NETWERK / HOSTING / WEB</span>
+          </div>
+          <div class="tm-stage-bottom">
+            <span data-chapter-label>01 — DIGITALE INFRASTRUCTUUR</span>
+            <button type="button" class="tm-glass cursor-interaction" data-jump="next">
+              Scroll om te ontdekken ↓
+            </button>
+            <div class="tm-progress"></div>
+          </div>
         </div>
-        <span class="section-stub__status">In uitwerking</span>
       </section>
-    ))}
-  </main>
-  <SheetTitleBlock />
+      <section class="tm-work" id="projecten">
+        <div class="tm-work-head">
+          <h2>
+            Twee disciplines.
+            <br />
+            Eén portfolio.
+          </h2>
+          <small>Mijn projecten & werkzaamheden</small>
+        </div>
+        <div class="tm-project-groups">
+          <section class="tm-project-group" aria-labelledby="tm-digital-projects">
+            <p class="tm-group-label">01 / Digitale infrastructuur</p>
+            <h3 id="tm-digital-projects">Websites & systemen.</h3>
+            <p class="tm-group-intro">Eigen ondernemingen en werk voor organisaties.</p>
+            <details>
+              <summary class="cursor-interaction">
+                <strong>STC de Rijnstreek</strong>
+                <small>Volledige herbouw · WordPress · Vrijwilligerswerk</small>
+                <span class="tm-plus" aria-hidden="true">
+                  +
+                </span>
+              </summary>
+              <p>
+                Als vrijwilliger heb ik de volledige website van STC de Rijnstreek herbouwd. Ik ben
+                zelf ook schaatstrainer bij de vereniging.
+              </p>
+              <p>
+                Ik koos voor WordPress, zodat de vereniging de inhoud eenvoudig zelf kan beheren. De
+                techniek sluit zo aan op de mensen die de website onderhouden.
+              </p>
+              <a
+                class="tm-glass"
+                href="https://stcderijnstreek.nl"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Bekijk de website ↗
+              </a>
+            </details>
+            <details>
+              <summary class="cursor-interaction">
+                <strong>GalaxyHost</strong>
+                <small>Gamehosting · Webhosting · Virtual machines</small>
+                <span class="tm-plus" aria-hidden="true">
+                  +
+                </span>
+              </summary>
+              <p>
+                In 2020 begon ik met het verhuren van serverruimte voor games. Later kwamen
+                webhosting en virtual machines erbij. Door zelfstudie en experimenten ontwikkelde ik
+                kennis van hardware, netwerkbeveiliging, DDoS-bescherming en firewalls.
+              </p>
+              <a
+                class="tm-glass"
+                href="https://galaxyhost.pro"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Bekijk GalaxyHost ↗
+              </a>
+            </details>
+            <details>
+              <summary class="cursor-interaction">
+                <strong>Servura</strong>
+                <small>Websites & hosting voor het MKB · In opbouw</small>
+                <span class="tm-plus" aria-hidden="true">
+                  +
+                </span>
+              </summary>
+              <p>
+                Met Servura bouw ik aan hosting- en designoplossingen voor zakelijke klanten. We
+                staan open voor nieuwe projecten en denken mee over wat een organisatie nodig heeft.
+              </p>
+              <a
+                class="tm-glass"
+                href="https://servura.nl"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Bespreek je project ↗
+              </a>
+            </details>
+          </section>
+          <section class="tm-project-group civil" aria-labelledby="tm-civil-projects">
+            <p class="tm-group-label">02 / Civiele techniek</p>
+            <h3 id="tm-civil-projects">Voorbereiding & uitvoering.</h3>
+            <p class="tm-group-intro">Mijn werk bij KWS Infra Amsterdam-Utrecht.</p>
+            <details open>
+              <summary class="cursor-interaction">
+                <strong>Asfaltonderhoud Haarlemmermeer</strong>
+                <small>KWS Infra Amsterdam-Utrecht · ROK-contract</small>
+                <span class="tm-plus" aria-hidden="true">
+                  +
+                </span>
+              </summary>
+              <p>
+                In mijn rol als projectbegeleider / werkvoorbereider komen techniek, planning en
+                organisatie samen. Ik bereid werkzaamheden voor en stem met het projectteam en
+                externe partijen af wat nodig is voor de uitvoering.
+              </p>
+              <ul>
+                <li>Planning en budgetten.</li>
+                <li>Veiligheid en kwaliteitsborging.</li>
+                <li>Inkoop en contact met leveranciers en onderaannemers.</li>
+                <li>Samenwerking met het projectteam.</li>
+                <li>Bijdragen aan de duurzaamheidsambities van KWS.</li>
+              </ul>
+              <p>
+                Mijn opleiding Civiele Techniek aan de Hogeschool Rotterdam vormt de basis van mijn
+                werk in de infrastructuur.
+              </p>
+            </details>
+          </section>
+        </div>
+      </section>
+      <section class="tm-bio" id="tm-about">
+        <div class="tm-portrait" aria-label="Portret van Tim van Gorkom">
+          <img
+            src={portraitExists ? `${base}images/tim-van-gorkom.webp` : undefined}
+            alt="Tim van Gorkom"
+            hidden={!portraitExists}
+            data-portrait
+            loading="lazy"
+            width="640"
+            height="800"
+          />
+          <div class="tm-portrait-placeholder" hidden={portraitExists}>
+            <span class="tm-portrait-monogram" aria-hidden="true">
+              TvG
+            </span>
+            <span>Tim van Gorkom</span>
+          </div>
+          <div class="tm-photo-actions" data-photo-editor hidden>
+            <span>Tim van Gorkom</span>
+            <input id="tm-photo-file" class="tm-upload-input" type="file" accept="image/*" />
+            <label class="tm-glass cursor-interaction" for="tm-photo-file">
+              Foto toevoegen ↗
+            </label>
+          </div>
+        </div>
+        <div>
+          <p class="tm-group-label">Over Tim</p>
+          <h2>
+            Nieuwsgierig.
+            <br />
+            Graag aan het bouwen.
+          </h2>
+          <p>
+            Ik zit niet graag stil. Naast mijn werk verdiep ik mij in hosting, hardware en software.
+            Ik werk onder andere met PHP, Java, HTML en CSS en met systemen zoals Ubuntu en Windows.
+          </p>
+          <p>
+            Buiten mijn technische werk ben ik schaatstrainer bij STC de Rijnstreek. Daar heb ik als
+            vrijwilliger ook de volledige website herbouwd.
+          </p>
+        </div>
+        <p class="tm-photo-message" aria-live="polite" hidden></p>
+      </section>
+      <section class="tm-end">
+        <div>
+          <h2>Wat wil jij bouwen?</h2>
+          <p>Voor websites, hosting en ontwikkeling denk ik via Servura graag met je mee.</p>
+        </div>
+        <a
+          class="tm-glass tm-contact"
+          href="https://servura.nl"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Bespreek je project ↗
+        </a>
+      </section>
+      <footer class="tm-foot">Tim van Gorkom · Infra & IT</footer>
+    </main>
+  </div>
+  <script>
+    import '../scripts/portfolio.js';
+    import '../scripts/shell.ts';
+  </script>
 </BaseLayout>
